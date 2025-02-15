@@ -2,8 +2,9 @@ package main.trainings.operators;
 
 public class IncrementDecrement {
     public static void main(String[] args) {
-        int a = 10;
-        int c = a*++a;
-        System.out.println(a +" " +c);
+        int x = 5,z;
+        int y = 4;
+        z = 2*x++ + 3 * ++x;
+        System.out.println(z);
     }
 }
