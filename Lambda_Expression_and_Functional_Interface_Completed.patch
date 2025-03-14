@@ -1,0 +1,217 @@
+Subject: [PATCH] Lambda Expression and Functional Interface Completed
+---
+Index: src/main/trainings/InterfaceExamples/CallBackMethod.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/trainings/InterfaceExamples/CallBackMethod.java b/src/main/trainings/InterfaceExamples/CallBackMethod.java
+new file mode 100644
+--- /dev/null	(date 1741499968588)
++++ b/src/main/trainings/InterfaceExamples/CallBackMethod.java	(date 1741499968588)
+@@ -0,0 +1,40 @@
++package main.trainings.InterfaceExamples;
++
++interface IMember{
++    void callBack();
++}
++
++class Store{
++    IMember [] iMember = new IMember[100];
++    int count;
++
++    void register(IMember mem){
++        iMember[count++] = mem;
++    }
++    void inviteForSale(){
++        for(int i=0;i<count;i++){
++            iMember[i].callBack();
++        }
++    }
++}
++
++class Customer implements IMember{
++    String name;
++    Customer(String name){
++        this.name=name;
++    }
++
++    @Override
++    public void callBack() {
++        System.out.println("I will visit the Store : "+ name);
++    }
++}
++
++public class CallBackMethod {
++    public static void main(String[] args) {
++        Customer customer = new Customer("Smith");
++        Store store = new Store();
++        store.register(customer);
++        store.inviteForSale();
++    }
++}
+Index: src/main/trainings/InterfaceExamples/FunctionalInterfaceExample.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/trainings/InterfaceExamples/FunctionalInterfaceExample.java b/src/main/trainings/InterfaceExamples/FunctionalInterfaceExample.java
+new file mode 100644
+--- /dev/null	(date 1741500513377)
++++ b/src/main/trainings/InterfaceExamples/FunctionalInterfaceExample.java	(date 1741500513377)
+@@ -0,0 +1,18 @@
++package main.trainings.InterfaceExamples;
++
++@FunctionalInterface
++interface FunctionalInterfaceEx {
++    void show();
++}
++
++public class FunctionalInterfaceExample{
++    public static void main(String[] args) {
++        FunctionalInterfaceEx obj = new FunctionalInterfaceEx() {
++            public void show() {
++                System.out.println("Yes");
++            }
++        };
++        obj.show();
++    }
++}
++
+Index: src/main/trainings/InterfaceExamples/Smartphone.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/trainings/InterfaceExamples/Smartphone.java b/src/main/trainings/InterfaceExamples/Smartphone.java
+new file mode 100644
+--- /dev/null	(date 1741496113416)
++++ b/src/main/trainings/InterfaceExamples/Smartphone.java	(date 1741496113416)
+@@ -0,0 +1,58 @@
++package main.trainings.InterfaceExamples;
++class phone{
++    void call(){
++        System.out.println("Calling from phone");
++    }
++    void sms(){
++        System.out.println("Sms sending from Phone");
++    }
++}
++
++interface ICamera{
++    void images();
++    void videoCall();
++}
++
++interface IMusicPlayer{
++    void play();
++    void stop();
++}
++class SmartphoneExample extends phone implements ICamera, IMusicPlayer{
++
++    @Override
++    public void images() {
++        System.out.println("Taking Images");
++    }
++
++    @Override
++    public void videoCall() {
++        System.out.println("Calling Video call");
++    }
++
++    @Override
++    public void play() {
++        System.out.println("Playing Music");
++    }
++
++    @Override
++    public void stop() {
++        System.out.println("Stopping music");
++    }
++}
++public class Smartphone{
++    public static void main(String[] args) {
++        SmartphoneExample smartphoneExample = new SmartphoneExample();
++        IMusicPlayer iMusicPlayer = new SmartphoneExample();
++        ICamera iCamera = new SmartphoneExample();
++        iCamera.images();
++        iCamera.videoCall();
++        iMusicPlayer.play();
++        iMusicPlayer.stop();
++        //smartphoneExample.videoCall();
++        smartphoneExample.sms();
++        //smartphoneExample.images();
++        //smartphoneExample.play();
++        //smartphoneExample.stop();
++        smartphoneExample.call();
++    }
++}
+Index: src/main/trainings/SingleTonExample/SingletonEx.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/trainings/SingleTonExample/SingletonEx.java b/src/main/trainings/SingleTonExample/SingletonEx.java
+new file mode 100644
+--- /dev/null	(date 1741512293007)
++++ b/src/main/trainings/SingleTonExample/SingletonEx.java	(date 1741512293007)
+@@ -0,0 +1,36 @@
++package main.trainings.SingleTonExample;
++
++class CoffeeMachine{
++    private final float milkQuantity;
++    private final String flavour;
++    private static CoffeeMachine cm = null;
++
++    private CoffeeMachine(){
++        milkQuantity=1;
++        flavour="Cappucino";
++    }
++
++    public void getCoffee(){
++        System.out.println("Coffee flavour is : " +flavour+ " and the milk quantity available is : "+milkQuantity);
++    }
++
++    public static CoffeeMachine getInstance(){
++        if(cm==null){
++            cm = new CoffeeMachine();
++        }
++        return cm;
++    }
++}
++
++public class SingletonEx {
++    public static void main(String[] args) {
++        CoffeeMachine m1 = CoffeeMachine.getInstance();
++        CoffeeMachine m2 = CoffeeMachine.getInstance();
++        CoffeeMachine m3 = CoffeeMachine.getInstance();
++        if(m1==m2 && m1==m3){
++            System.out.println("Objects are same reference");
++        }
++        System.out.println(m1);
++        m1.getCoffee();
++    }
++}
+Index: src/main/trainings/InterfaceExamples/LambdaEx.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/trainings/InterfaceExamples/LambdaEx.java b/src/main/trainings/InterfaceExamples/LambdaEx.java
+new file mode 100644
+--- /dev/null	(date 1741500758477)
++++ b/src/main/trainings/InterfaceExamples/LambdaEx.java	(date 1741500758477)
+@@ -0,0 +1,13 @@
++package main.trainings.InterfaceExamples;
++
++@FunctionalInterface
++interface A{
++    void show();
++}
++public class LambdaEx {
++    public static void main(String[] args) {
++        A obj = () -> System.out.println("In Lambda expression");
++
++        obj.show();
++    }
++}
