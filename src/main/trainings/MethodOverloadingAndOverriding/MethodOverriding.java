@@ -12,7 +12,7 @@ class Child extends Parent{
     public Child(){
         System.out.println("Child Constructor called");
     }
-    public void display(int x){
+    public void display(){
         System.out.println("Display method in Child");
     }
 }
